@@ -58,10 +58,4 @@ public final class AgentDAO
         return a;
     }
     
-    public void locate()
-    {
-        
-    }
-    
-
 }
