@@ -10,12 +10,12 @@ public class Voiture
     String carburant;
     String puiss;
     String couleur;
-    String police;
+    Assurance police;
     float tarif;
     float caution;
     File image;
 
-    public Voiture(String mat, String marque, String model, String carburant, String puiss, String couleur, String police, float tarif, float caution, File image) {
+    public Voiture(String mat, String marque, String model, String carburant, String puiss, String couleur, Assurance police, float tarif, float caution, File image) {
         this.mat = mat;
         this.marque = marque;
         this.model = model;
@@ -52,7 +52,7 @@ public class Voiture
         return couleur;
     }
 
-    public String getPolice() {
+    public Assurance getPolice() {
         return police;
     }
 
