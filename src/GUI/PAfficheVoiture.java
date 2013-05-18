@@ -36,12 +36,9 @@ public class PAfficheVoiture extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         TFMarque = new javax.swing.JTextField();
         jButtonRecherche = new javax.swing.JButton();
-        jButtonLouer = new javax.swing.JButton();
-        jButtonReparer = new javax.swing.JButton();
-        jButtonLocaliser = new javax.swing.JButton();
         jButtonModifier = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jButtonVendre = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(400, 500));
         setMinimumSize(new java.awt.Dimension(400, 500));
@@ -61,6 +58,7 @@ public class PAfficheVoiture extends javax.swing.JPanel {
 
         jLabel1.setText("Marque");
 
+        jButtonRecherche.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         jButtonRecherche.setText("Rechercher");
         jButtonRecherche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,24 +66,14 @@ public class PAfficheVoiture extends javax.swing.JPanel {
             }
         });
 
-        jButtonLouer.setText("Louer");
-        jButtonLouer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLouerActionPerformed(evt);
-            }
-        });
-
-        jButtonReparer.setText("Reparer");
-
-        jButtonLocaliser.setText("Localiser");
-
+        jButtonModifier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit.png"))); // NOI18N
         jButtonModifier.setText("Modifier");
 
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel2.setText("GESTION DES VOITURES");
-
+        jButtonVendre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow 1.png"))); // NOI18N
         jButtonVendre.setText("Vendre");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus.png"))); // NOI18N
+        jButton1.setText("Ajouter Nouvelle");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,52 +83,39 @@ public class PAfficheVoiture extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(TFMarque, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonRecherche)
-                        .addGap(44, 44, 44))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jButtonLouer, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonReparer, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonLocaliser, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonModifier, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonVendre, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addComponent(TFMarque)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonRecherche)
+                .addGap(44, 44, 44))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonModifier, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonVendre, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(74, 74, 74)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TFMarque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonRecherche))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonLouer)
-                    .addComponent(jButtonReparer)
-                    .addComponent(jButtonLocaliser)
-                    .addComponent(jButtonModifier)
-                    .addComponent(jButtonVendre))
-                .addGap(67, 67, 67))
+                    .addComponent(jButtonModifier, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVendre, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -148,21 +123,14 @@ public class PAfficheVoiture extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRechercheActionPerformed
 
-    private void jButtonLouerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLouerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonLouerActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TFMarque;
-    private javax.swing.JButton jButtonLocaliser;
-    private javax.swing.JButton jButtonLouer;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonModifier;
     private javax.swing.JButton jButtonRecherche;
-    private javax.swing.JButton jButtonReparer;
     private javax.swing.JButton jButtonVendre;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListeVoiture;
     // End of variables declaration//GEN-END:variables

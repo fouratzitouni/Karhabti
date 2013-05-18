@@ -28,45 +28,31 @@
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="TFMarque" pref="271" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonRecherche" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="jButtonLouer" min="-2" pref="71" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonReparer" min="-2" pref="83" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonLocaliser" min="-2" pref="81" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButtonModifier" min="-2" pref="83" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonVendre" min="-2" pref="81" max="-2" attributes="0"/>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <Component id="TFMarque" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButtonRecherche" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="496" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButtonModifier" min="-2" pref="147" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButtonVendre" min="-2" pref="147" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="TFMarque" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -74,15 +60,13 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="206" max="-2" attributes="0"/>
-              <EmptySpace pref="44" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonLouer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonReparer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonLocaliser" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonModifier" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonVendre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonModifier" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="jButtonVendre" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+              <EmptySpace pref="152" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,49 +97,37 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonRecherche">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/search.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Rechercher"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRechercheActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonLouer">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Louer"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLouerActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonReparer">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Reparer"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonLocaliser">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Localiser"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jButtonModifier">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/edit.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Modifier"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="24" style="3"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="0" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="GESTION DES VOITURES"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonVendre">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/arrow 1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Vendre"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/plus.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Ajouter Nouvelle"/>
       </Properties>
     </Component>
   </SubComponents>
