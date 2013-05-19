@@ -1,10 +1,13 @@
 package Metier;
 
+import java.sql.Date;
+
 public class EntreReparation
 {
-    String mat, designation, garage, date, dure, prix;
+    String mat, designation, garage, dure, prix;
+    Date date;
 
-    public EntreReparation(String mat, String designation, String garage, String date, String dure, String prix) {
+    public EntreReparation(String mat, String designation, String garage, Date date, String dure, String prix) {
         this.mat = mat;
         this.designation = designation;
         this.garage = garage;
@@ -25,7 +28,7 @@ public class EntreReparation
         return garage;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 

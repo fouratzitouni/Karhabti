@@ -1,14 +1,16 @@
 package Metier;
 
+import java.sql.Date;
+
 public class Contrat
 {
-    String debut, fin;
+    Date debut, fin;
     Agent agent;
     Client client1, client2;
     Voiture v;
     Chauffeur chauffeur;
 
-    public Contrat(String debut, String fin, Agent agent, Client client1, Voiture v) {
+    public Contrat(Date debut, Date fin, Agent agent, Client client1, Voiture v) {
         this.debut = debut;
         this.fin = fin;
         this.agent = agent;
@@ -16,19 +18,19 @@ public class Contrat
         this.v = v;
     }
 
-    public String getDebut() {
+    public Date getDebut() {
         return debut;
     }
 
-    public void setDebut(String debut) {
+    public void setDebut(Date debut) {
         this.debut = debut;
     }
 
-    public String getFin() {
+    public Date getFin() {
         return fin;
     }
 
-    public void setFin(String fin) {
+    public void setFin(Date fin) {
         this.fin = fin;
     }
 

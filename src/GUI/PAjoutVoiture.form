@@ -46,32 +46,35 @@
                   <Component id="jLabel10" linkSize="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel11" max="32767" attributes="0"/>
-                          <Component id="TFImage" pref="262" max="32767" attributes="0"/>
-                          <Component id="TFCaution" alignment="0" pref="262" max="32767" attributes="0"/>
-                          <Component id="TFTarif" alignment="0" pref="262" max="32767" attributes="0"/>
-                          <Component id="TFAssurance" alignment="0" pref="262" max="32767" attributes="0"/>
-                          <Component id="TFCouleur" alignment="0" pref="262" max="32767" attributes="0"/>
-                          <Component id="TFCarburant" alignment="0" pref="262" max="32767" attributes="0"/>
-                          <Component id="TFMatricule" alignment="0" pref="262" max="32767" attributes="2"/>
-                          <Component id="TFModele" alignment="0" pref="262" max="32767" attributes="2"/>
-                          <Component id="TFPuissance" alignment="0" pref="262" max="32767" attributes="0"/>
-                          <Component id="TFMarque" alignment="0" pref="262" max="32767" attributes="2"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jComboBox1" alignment="0" pref="287" max="32767" attributes="0"/>
+                          <Component id="TFImage" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TFCaution" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TFTarif" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TFAssurance" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TFCouleur" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TFPuissance" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TFModele" alignment="0" max="32767" attributes="2"/>
+                          <Component id="TFMarque" alignment="0" max="32767" attributes="2"/>
+                          <Component id="TFMatricule" alignment="0" max="32767" attributes="2"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jButtonParcourir" max="32767" attributes="0"/>
+                          <Component id="jButton1" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="107" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel11" min="-2" pref="218" max="-2" attributes="0"/>
               </Group>
-              <Component id="jButtonParcourir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
+              <Component id="jButton2" min="-2" pref="127" max="-2" attributes="0"/>
+              <EmptySpace pref="279" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -102,8 +105,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="TFCarburant" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -114,6 +117,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="TFAssurance" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -131,9 +135,9 @@
                   <Component id="TFImage" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonParcourir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" pref="33" max="-2" attributes="0"/>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButton2" min="-2" pref="43" max="-2" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -250,13 +254,6 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="TFCarburant">
-      <Properties>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[15, 20]"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="TFCouleur">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -266,6 +263,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="TFAssurance">
       <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[15, 20]"/>
         </Property>
@@ -296,15 +294,21 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="66" red="66" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="AJOUTER UNE VOITURE"/>
+        <Property name="text" type="java.lang.String" value="Ajouter une Voiture"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TFImage">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonParcourir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Parcourir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonParcourirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
@@ -312,6 +316,24 @@
           <Image iconType="3" name="/img/tick 1.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Valider"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ajouter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;Essence&quot;, &quot;Diesel&quot;, &quot;GPL&quot;, &quot;Electrique&quot; })" type="code"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

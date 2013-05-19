@@ -47,9 +47,9 @@ public final class ContratDAO
             {
                 pst.setString(4, null);
             }
-            pst.setInt(5,Authentification.getInstance().getAgent().getId()); 
-            pst.setString(6,c.getDebut());
-            pst.setString(7,c.getFin());
+            pst.setInt(5,Authentification.getInstance().getAgent().getId());
+            pst.setDate(6,c.getDebut());
+            pst.setDate(7,c.getFin());
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }

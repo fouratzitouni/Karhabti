@@ -46,6 +46,7 @@ public class MainFrame extends JFrame
         this.setLocation(30,60);
         this.setTitle("Karhabti: Location de Voiture");
         this.setResizable(false);
+        this.setAlwaysOnTop(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);

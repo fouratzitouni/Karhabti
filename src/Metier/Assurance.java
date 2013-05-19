@@ -1,11 +1,14 @@
 package Metier;
 
+import java.sql.Date;
+
 public class Assurance
 {
-    String numero, debut, fin;
+    String numero;
+    Date debut, fin;
     float prix;
 
-    public Assurance(String numero, String debut, String fin, float prix) {
+    public Assurance(String numero, Date debut, Date fin, float prix) {
         this.numero = numero;
         this.debut = debut;
         this.fin = fin;
@@ -18,11 +21,11 @@ public class Assurance
 
 
 
-    public String getDebut() {
+    public Date getDebut() {
         return debut;
     }
 
-    public String getFin() {
+    public Date getFin() {
         return fin;
     }
 
