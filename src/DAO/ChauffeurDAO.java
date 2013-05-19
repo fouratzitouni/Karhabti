@@ -6,6 +6,7 @@ import Metier.Chauffeur;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public final class ChauffeurDAO
@@ -64,5 +65,23 @@ public final class ChauffeurDAO
             System.out.println(ex.getMessage());
         }
         return id;
+    }
+    
+    public ArrayList<Chauffeur> listAll()
+    {
+        ArrayList<Chauffeur> l = new ArrayList<Chauffeur>();
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM chauffeur;");
+            ResultSet res = pst.executeQuery();
+            while(res.next())
+            {
+                Chauffeur c = new Chauffeur(res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getFloat(7));
+                l.add(c);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return l;
     }
 }

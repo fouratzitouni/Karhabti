@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public final class AgentDAO
 {
@@ -56,6 +57,24 @@ public final class AgentDAO
             System.out.println(ex.getMessage());
         }
         return a;
+    }
+    
+    public ArrayList<Agent> listAll()
+    {
+        ArrayList<Agent> l = new ArrayList<Agent>();
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM agent;");
+            ResultSet res = pst.executeQuery();
+            while(res.next())
+            {
+                Agent a = new Agent(res.getString(2),res.getString(3),res.getString(4),res.getString(6));
+                l.add(a);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return l;
     }
     
 }
