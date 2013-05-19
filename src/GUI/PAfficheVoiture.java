@@ -33,6 +33,11 @@ public class PAfficheVoiture extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(400, 500));
 
         jTableListeVoiture.setModel(this.tm);
+        jTableListeVoiture.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListeVoitureMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableListeVoiture);
 
         jLabel1.setText("Marque");
@@ -55,6 +60,11 @@ public class PAfficheVoiture extends javax.swing.JPanel {
 
         jButtonVendre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow 1.png"))); // NOI18N
         jButtonVendre.setText("Vendre");
+        jButtonVendre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVendreActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus.png"))); // NOI18N
         jButton1.setText("Ajouter Nouvelle");
@@ -109,7 +119,15 @@ public class PAfficheVoiture extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRechercheActionPerformed
-        // TODO add your handling code here:
+        if(!TFMarque.getText().isEmpty())
+        {
+            String marque = TFMarque.getText();
+            tm.setData(tm.refresh(VoitureDAO.getInstance().search(marque)));
+        }
+        else 
+        {
+            tm.setData(tm.refresh());
+        }
     }//GEN-LAST:event_jButtonRechercheActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -140,6 +158,39 @@ public class PAfficheVoiture extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Pas de voiture selectionnee","Erreur",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonModifierActionPerformed
+
+    private void jButtonVendreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVendreActionPerformed
+        if(jTableListeVoiture.getSelectedRow() != -1)
+        {
+            String v = String.valueOf(tm.getValueAt(jTableListeVoiture.getSelectedRow(),0));
+            JFrame f = new JFrame("Modifier une Voiture");
+            
+            f.setSize(600,500);
+            this.add(new PVendreVoiture(v, f));
+            f.setAlwaysOnTop(true);
+            f.setResizable(false);
+            f.setLocation(20,20);
+            f.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Pas de voiture selectionnee","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonVendreActionPerformed
+
+    private void jTableListeVoitureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListeVoitureMouseClicked
+        if(evt.getClickCount() == 2 && !evt.isConsumed())
+        {
+            Voiture v = VoitureDAO.getInstance().find(String.valueOf(tm.getValueAt(jTableListeVoiture.getSelectedRow(),0)));
+            JFrame f = new JFrame("Fiche de Voiture "+v.getMat());
+            f.setSize(600,500);
+            f.add(new PViewVoiture(v,f));
+            f.setAlwaysOnTop(true);
+            f.setResizable(false);
+            f.setLocation(20,20);
+            f.setVisible(true);
+        }
+    }//GEN-LAST:event_jTableListeVoitureMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

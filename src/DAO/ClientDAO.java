@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public final class ClientDAO
 {
@@ -25,8 +25,9 @@ public final class ClientDAO
         return ins;
     }
     
-    public void insert(Client c)
+    public boolean insert(Client c)
     {
+        boolean t = false;
         try
         {
             PreparedStatement pst = getConnection().prepareStatement("INSERT INTO client VALUES(?,?,?,?,?,?,?,?);");
@@ -35,13 +36,21 @@ public final class ClientDAO
             pst.setString(3,c.getNom());
             pst.setString(4,c.getPrenom());
             pst.setString(5,c.getAdr());
-            pst.setString(6,c.getEmail());
+            if(c.getEmail() != null)
+            {
+                pst.setString(6,c.getEmail());
+            }
+            else
+            {
+                pst.setString(6,null);
+            }
             pst.setString(7,c.getTel());
             pst.setString(8,c.getCat());
-            pst.executeUpdate();
+            t= !pst.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+        return t;
     }
     
     public Client find(String cin)
@@ -66,23 +75,70 @@ public final class ClientDAO
         return c;
     }
     
-    public List<Client> listAll()
+    public ArrayList<Client> listAll()
     {
-        List<Client> l = new ArrayList<Client>();
+        ArrayList<Client> l = new ArrayList<Client>();
         try
         {
             PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM client;");
             ResultSet res = pst.executeQuery();
             while(res.next())
             {
-                
-                //l.add(v);
+                Client c = new Client(res.getString(1),res.getString(2),res.getString(3),res.getString(4),
+                        res.getString(5),res.getString(7),res.getString(8));
+                if(res.getString(6) != null)
+                {
+                    c.setEmail(res.getString(6));
+                }
+                l.add(c);
             }
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
-        }/*catch(FileNotFoundException ex){
-            System.out.println(ex.getMessage());
-        }*/
+        }
         return l;
+    }
+    
+    public boolean edit(Client c)
+    {
+        boolean t = false;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("UPDATE client SET "
+                    + "permis = ?, nom = ?, prenom = ?, adr = ?, email = ?, tel = ?, cat = ?"
+                    + " WHERE cin = ?");
+            pst.setString(8,c.getCin());
+            pst.setString(1,c.getPermi());
+            pst.setString(2,c.getNom());
+            pst.setString(3,c.getPrenom());
+            pst.setString(4,c.getAdr());
+            if(c.getEmail() != null)
+            {
+                pst.setString(5,c.getEmail());
+            }
+            else
+            {
+                pst.setString(5,null);
+            }
+            pst.setString(6,c.getTel());
+            pst.setString(7,c.getCat());
+            t= !pst.execute();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return t;
+    }
+    
+    public boolean delete(String cin)
+    {
+        boolean t = false;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("DELETE FROM client WHERE cin = ? ;");
+            pst.setString(1,cin);
+            t= !pst.execute();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return t;
     }
 }

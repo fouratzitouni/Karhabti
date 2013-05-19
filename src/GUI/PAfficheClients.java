@@ -4,15 +4,18 @@
  */
 package GUI;
 
+import DAO.ClientDAO;
+import Metier.Client;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fourat
  */
 public class PAfficheClients extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PAfficheClients
-     */
+    MyTableClients tm = new MyTableClients();
     public PAfficheClients() {
         initComponents();
     }
@@ -40,27 +43,32 @@ public class PAfficheClients extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setText("Liste des Clients");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-
-            }
-        ));
+        jTable1.setModel(this.tm);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus.png"))); // NOI18N
         jButton1.setText("Ajouter Nouveau");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus.png"))); // NOI18N
         jButton2.setText("Supprimer");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit.png"))); // NOI18N
         jButton4.setText("Modifier");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,6 +109,60 @@ public class PAfficheClients extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFrame f = new JFrame("Ajouter un Client");
+        f.setSize(600,500);
+        f.add(new PAjoutClient(f,null,0,this));
+        f.setAlwaysOnTop(true);
+        f.setResizable(false);
+        f.setLocation(20,20);
+        f.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(jTable1.getSelectedRow() != -1)
+        {
+            Client c = ClientDAO.getInstance().find(String.valueOf(tm.getValueAt(jTable1.getSelectedRow(),2)));
+            JFrame f = new JFrame("Modifier un Client");
+            f.setSize(600,500);
+            f.add(new PAjoutClient(f,c,2,this));
+            f.setAlwaysOnTop(true);
+            f.setResizable(false);
+            f.setLocation(20,20);
+            f.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Pas de client selectionne","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(jTable1.getSelectedRow() != -1)
+        {
+            int reply = JOptionPane.showConfirmDialog(this,"Etes vous sur de vouloir supprimer ce client ??",
+                "Confirmation",JOptionPane.YES_NO_OPTION);
+            if(reply == 0)
+            {
+                String cin = String.valueOf(tm.getValueAt(jTable1.getSelectedRow(),2));
+                if(ClientDAO.getInstance().delete(cin))
+                {
+                    JOptionPane.showMessageDialog(this,"Client Supprime","Succes",JOptionPane.INFORMATION_MESSAGE);
+                    this.tm.setData(this.tm.refresh());
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"Erreur de connexion","Erreur",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Pas de client selectionne","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

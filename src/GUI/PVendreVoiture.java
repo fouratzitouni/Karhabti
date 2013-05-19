@@ -4,6 +4,10 @@
  */
 package GUI;
 
+import DAO.VoitureDAO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fourat
@@ -13,7 +17,11 @@ public class PVendreVoiture extends javax.swing.JPanel {
     /**
      * Creates new form PVendreVoiture
      */
-    public PVendreVoiture() {
+    String v;
+    JFrame f;
+    public PVendreVoiture(String v,JFrame f) {
+        this.v=v;
+        this.f=f;
         initComponents();
     }
 
@@ -42,9 +50,19 @@ public class PVendreVoiture extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tick 1.png"))); // NOI18N
         jButton1.setText("Vendre");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/error 1.png"))); // NOI18N
         jButton2.setText("Annuler");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -88,6 +106,22 @@ public class PVendreVoiture extends javax.swing.JPanel {
                 .addContainerGap(59, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.f.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(VoitureDAO.getInstance().delete(v))
+        {
+            JOptionPane.showMessageDialog(this,"Voiture vendue","Success",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Erreur de connexion","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

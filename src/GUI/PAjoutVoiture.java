@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * PAjoutVoiture.java
- *
- * Created on 13 mai 2013, 17:10:09
- */
 
 package GUI;
 
@@ -317,7 +307,7 @@ public class PAjoutVoiture extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if(!(TFMatricule.getText().isEmpty() && TFMarque.getText().isEmpty() 
                 && TFModele.getText().isEmpty() && TFPuissance.getText().isEmpty() 
-                && TFCouleur.getText().isEmpty() && (jComboBox1.getSelectedIndex() != -1)
+                && TFCouleur.getText().isEmpty() && (jComboBox1.getSelectedIndex() == -1)
                 && TFAssurance.getText().isEmpty() && TFTarif.getText().isEmpty() 
                 && TFCaution.getText().isEmpty()))
         {

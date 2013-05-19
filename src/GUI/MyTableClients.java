@@ -1,51 +1,33 @@
 package GUI;
 
-import DAO.VoitureDAO;
-import Metier.Voiture;
+import DAO.ClientDAO;
+import Metier.Client;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
-public class MyTableVoitures extends AbstractTableModel
+public class MyTableClients extends AbstractTableModel
 {
 
-    private String[] colHeader = {"Matricule","Marque","Modele","Couleur","Tarif"};
+    private String[] colHeader = {"Nom","Prenom","Cin","Telephone"};
     private Object[][] rows = refresh();
-
-    
-    
 
     public Object[][] refresh() 
     {
-        ArrayList<Voiture> l = VoitureDAO.getInstance().listAll();
-        Object[][] tab = new Object[l.size()][5];
+        ArrayList<Client> l = ClientDAO.getInstance().listAll();
+        Object[][] tab = new Object[l.size()][4];
         int i = 0;
-        for(Voiture v : l)
+        for(Client c : l)
         {
-            tab[i][0] = v.getMat();
-            tab[i][1] = v.getMarque();
-            tab[i][2] = v.getModel();
-            tab[i][3] = v.getCouleur();
-            tab[i][4] = v.getTarif();
+            tab[i][0] = c.getNom();
+            tab[i][1] = c.getPrenom();
+            tab[i][2] = c.getCin();
+            tab[i][3] = c.getTel();
             i++;
         }
         return tab;
     }
     
-    public Object[][] refresh(ArrayList<Voiture> l) 
-    {
-        Object[][] tab = new Object[l.size()][5];
-        int i = 0;
-        for(Voiture v : l)
-        {
-            tab[i][0] = v.getMat();
-            tab[i][1] = v.getMarque();
-            tab[i][2] = v.getModel();
-            tab[i][3] = v.getCouleur();
-            tab[i][4] = v.getTarif();
-            i++;
-        }
-        return tab;
-    }
+    
     
     public Object getValueAt(int arg0, int arg1) {
         return rows[arg0][arg1];

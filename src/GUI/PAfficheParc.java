@@ -4,15 +4,18 @@
  */
 package GUI;
 
+import DAO.VoitureDAO;
+import Metier.Voiture;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fourat
  */
 public class PAfficheParc extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PAfficheParc
-     */
+    MyTableParc tm = new MyTableParc();
     public PAfficheParc() {
         initComponents();
     }
@@ -47,6 +50,12 @@ public class PAfficheParc extends javax.swing.JPanel {
         jButtonReparer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tool.png"))); // NOI18N
         jButtonReparer.setText("Reparer");
 
+        jTable1.setModel(this.tm);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
@@ -92,8 +101,44 @@ public class PAfficheParc extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLouerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLouerActionPerformed
-        // TODO add your handling code here:
+        if(jTable1.getSelectedRow() != -1)
+        {
+            String dispo = String.valueOf(tm.getValueAt(jTable1.getSelectedRow(),2));
+            if(dispo.equals("Disponible"))
+            {
+                Voiture v = VoitureDAO.getInstance().find(String.valueOf(tm.getValueAt(jTable1.getSelectedRow(),0)));
+                JFrame f = new JFrame("Louer une Voiture");
+                f.setSize(600,500);
+                f.add(new PLouer(f,v));
+                f.setAlwaysOnTop(true);
+                f.setResizable(false);
+                f.setLocation(20,20);
+                f.setVisible(true);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"Voiture non disponible","Erreur",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Pas de voiture selectionnee","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonLouerActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if(evt.getClickCount() == 2 && !evt.isConsumed())
+        {
+            Voiture v = VoitureDAO.getInstance().find(String.valueOf(tm.getValueAt(jTable1.getSelectedRow(),0)));
+            JFrame f = new JFrame("Fiche de Voiture "+v.getMat());
+            f.setSize(600,500);
+            f.add(new PViewVoiture(v,f));
+            f.setAlwaysOnTop(true);
+            f.setResizable(false);
+            f.setLocation(20,20);
+            f.setVisible(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLocaliser;

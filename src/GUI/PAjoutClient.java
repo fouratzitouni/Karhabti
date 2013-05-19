@@ -1,25 +1,40 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * PAjoutClient.java
- *
- * Created on 13 mai 2013, 18:13:21
- */
 
 package GUI;
 
-/**
- *
- * @author Amine
- */
+import DAO.ClientDAO;
+import Metier.Client;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+
 public class PAjoutClient extends javax.swing.JPanel {
 
-    /** Creates new form PAjoutClient */
-    public PAjoutClient() {
+    JFrame f;
+    Client c;
+    int m;
+    PAfficheClients p;
+    public PAjoutClient(JFrame f, Client c,int m,PAfficheClients p) {
+        this.f=f;
+        this.c=c;
+        this.m=m;
+        this.p=p;
         initComponents();
+        if(this.m == 2)
+        {
+            jLabel1.setText("Modifier un Client");
+            jButtonValider.setText("Valider");
+            TFNom.setText(c.getNom());
+            TFPrenom.setText(c.getPrenom());
+            TFCin.setText(c.getCin());
+            TFPermis.setText(c.getPermi());
+            TFTel.setText(c.getTel());
+            if(c.getEmail() != null)
+            {
+                TFMail.setText(c.getEmail());
+            }
+            TFAdresse.setText(c.getCat());
+            TFCathegorie.setSelectedItem(c.getCat());
+        }
     }
 
     /** This method is called from within the constructor to
@@ -78,6 +93,11 @@ public class PAjoutClient extends javax.swing.JPanel {
 
         jButtonValider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tick 1.png"))); // NOI18N
         jButtonValider.setText("Ajouter");
+        jButtonValider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValiderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -155,6 +175,56 @@ public class PAjoutClient extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
+        if(!(TFNom.getText().isEmpty() && TFPrenom.getText().isEmpty() &&
+                TFCin.getText().isEmpty() && TFPermis.getText().isEmpty() && TFTel.getText().isEmpty()
+                && TFAdresse.getText().isEmpty() && (TFCathegorie.getSelectedIndex() == -1)))
+        {
+            String nom = TFNom.getText();
+            String prenom = TFPrenom.getText();
+            String cin = TFCin.getText();
+            String permis = TFPermis.getText();
+            String adr = TFAdresse.getText();
+            String tel = TFTel.getText();
+            String cat = String.valueOf(TFCathegorie.getSelectedItem());
+            Client c = new Client(cin, permis, nom, prenom, adr, tel, cat);
+            if(!TFMail.getText().isEmpty())
+            {
+                c.setEmail(TFMail.getText());
+            }
+            if(this.m == 2)
+            {
+                if(ClientDAO.getInstance().edit(c))
+                {
+                    JOptionPane.showMessageDialog(this,"Client Modifie","Succes",JOptionPane.INFORMATION_MESSAGE);
+                    this.p.tm.setData(this.p.tm.refresh());
+                    this.f.setVisible(false);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"Erreur de connexion","Erreur",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else
+            {
+                if(ClientDAO.getInstance().insert(c))
+                {
+                    JOptionPane.showMessageDialog(this,"Client Ajoute","Succes",JOptionPane.INFORMATION_MESSAGE);
+                    this.p.tm.setData(this.p.tm.refresh());
+                    this.f.setVisible(false);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"Erreur de connexion","Erreur",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Erreur d'ajout","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonValiderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
