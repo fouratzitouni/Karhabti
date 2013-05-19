@@ -49,7 +49,6 @@ public class PAjoutClient extends javax.swing.JPanel {
         TFCathegorie = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jButtonValider = new javax.swing.JButton();
-        jButtonAnnuler = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(400, 500));
         setMinimumSize(new java.awt.Dimension(400, 500));
@@ -71,67 +70,55 @@ public class PAjoutClient extends javax.swing.JPanel {
 
         jLabel9.setText("Catégorie");
 
-        TFCathegorie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Personnel", "Professionnel" }));
+        TFCathegorie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Particulier", "Professionnel" }));
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 3, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 204));
         jLabel1.setText("Ajoutez un client");
 
-        jButtonValider.setText("Valider");
-
-        jButtonAnnuler.setText("Annuler");
-        jButtonAnnuler.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAnnulerActionPerformed(evt);
-            }
-        });
+        jButtonValider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tick 1.png"))); // NOI18N
+        jButtonValider.setText("Ajouter");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(246, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(245, 245, 245))
             .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(109, 109, 109)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 96, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonValider)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TFPermis, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                            .addComponent(TFCin, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                            .addComponent(TFPrenom, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TFAdresse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                                    .addComponent(TFMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                                    .addComponent(TFTel, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                                    .addComponent(TFCathegorie, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonAnnuler, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addComponent(TFNom, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
-                        .addContainerGap(195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(TFMail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TFTel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TFPermis, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TFCin, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TFPrenom, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TFNom, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TFAdresse)
+                            .addComponent(TFCathegorie, javax.swing.GroupLayout.Alignment.LEADING, 0, 163, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(41, 41, 41)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(TFNom))
@@ -163,17 +150,11 @@ public class PAjoutClient extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(TFCathegorie))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonValider)
-                    .addComponent(jButtonAnnuler))
-                .addGap(72, 72, 72))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -185,7 +166,6 @@ public class PAjoutClient extends javax.swing.JPanel {
     private javax.swing.JTextField TFPermis;
     private javax.swing.JTextField TFPrenom;
     private javax.swing.JTextField TFTel;
-    private javax.swing.JButton jButtonAnnuler;
     private javax.swing.JButton jButtonValider;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
