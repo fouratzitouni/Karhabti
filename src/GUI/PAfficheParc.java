@@ -46,6 +46,11 @@ public class PAfficheParc extends javax.swing.JPanel {
 
         jButtonLocaliser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/location 2.png"))); // NOI18N
         jButtonLocaliser.setText("Localiser");
+        jButtonLocaliser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLocaliserActionPerformed(evt);
+            }
+        });
 
         jButtonReparer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tool.png"))); // NOI18N
         jButtonReparer.setText("Reparer");
@@ -77,11 +82,11 @@ public class PAfficheParc extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jButtonLouer, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(jButtonLocaliser, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(jButtonReparer)
+                .addComponent(jButtonLouer, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonLocaliser, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonReparer, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -109,7 +114,7 @@ public class PAfficheParc extends javax.swing.JPanel {
                 Voiture v = VoitureDAO.getInstance().find(String.valueOf(tm.getValueAt(jTable1.getSelectedRow(),0)));
                 JFrame f = new JFrame("Louer une Voiture");
                 f.setSize(600,500);
-                f.add(new PLouer(f,v));
+                f.add(new PLouer(f,v,this));
                 f.setAlwaysOnTop(true);
                 f.setResizable(false);
                 f.setLocation(20,20);
@@ -139,6 +144,18 @@ public class PAfficheParc extends javax.swing.JPanel {
             f.setVisible(true);
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButtonLocaliserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLocaliserActionPerformed
+        if(jTable1.getSelectedRow() != -1)
+        {
+            String mat = String.valueOf(tm.getValueAt(jTable1.getSelectedRow(),0));
+            new FLocateVoiture(mat);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Pas de voiture selectionnee","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonLocaliserActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLocaliser;

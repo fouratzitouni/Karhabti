@@ -4,16 +4,22 @@
  */
 package GUI;
 
+import DAO.AgentDAO;
+import Metier.Agent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fourat
  */
 public class PAjoutAgent extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PAjoutAgent
-     */
-    public PAjoutAgent() {
+    JFrame f;
+    PAfficheAgentsChaffeurs p;
+    public PAjoutAgent(JFrame f,PAfficheAgentsChaffeurs p) {
+        this.f=f;
+        this.p=p;
         initComponents();
     }
 
@@ -72,6 +78,11 @@ public class PAjoutAgent extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus.png"))); // NOI18N
         jButton1.setText("Ajouter");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,6 +155,34 @@ public class PAjoutAgent extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!(jTextField1.getText().isEmpty() && jTextField2.getText().isEmpty() && jTextField3.getText().isEmpty()
+                && jTextField4.getText().isEmpty() && jPasswordField1.getPassword().length == 0))
+        {
+            String nom = jTextField1.getText();
+            String prenom = jTextField2.getText();
+            String login = jTextField3.getText();
+            String pass = String.copyValueOf(jPasswordField1.getPassword());
+            String tel = jTextField4.getText();
+            Agent a = new Agent(nom, prenom, login, tel);
+            a.setPass(pass);
+            if(AgentDAO.getInstance().insert(a))
+            {
+                JOptionPane.showMessageDialog(this,"Agent Ajoute","Succes",JOptionPane.INFORMATION_MESSAGE);
+                this.p.tma.setData(this.p.tma.refresh());
+                this.f.setVisible(false);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"Erreur d'ajout","Erreur",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Erreur d'ajout","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

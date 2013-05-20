@@ -8,25 +8,36 @@ import javax.swing.table.AbstractTableModel;
 public class MyTableChauffeurs extends AbstractTableModel
 {
 
-    private String[] colHeader = {"Nom","Prenom","Tel","Prix"};
+    private String[] colHeader = {"Nom","Prenom","Tel"};
     private Object[][] rows = refresh();
 
     public Object[][] refresh() 
     {
         ArrayList<Chauffeur> l = ChauffeurDAO.getInstance().listAll();
-        Object[][] tab = new Object[l.size()][4];
+        Object[][] tab = new Object[l.size()][3];
         int i = 0;
         for(Chauffeur a : l)
         {
             tab[i][0] = a.getNom();
             tab[i][1] = a.getPrenom();
             tab[i][2] = a.getTel();
-            tab[i][3] = a.getPrix();
             i++;
         }
         return tab;
     }
     
+    public static String[] listnames()
+    {
+        ArrayList<Chauffeur> l = ChauffeurDAO.getInstance().listAll();
+        String[] list = new String[l.size()];
+        int i = 0;
+        for(Chauffeur c : l)
+        {
+            list[i] = c.getNom()+" "+c.getPrenom();
+            i++;
+        }
+        return list;
+    }
     
     
     public Object getValueAt(int arg0, int arg1) {

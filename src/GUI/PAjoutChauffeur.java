@@ -4,16 +4,22 @@
  */
 package GUI;
 
+import DAO.ChauffeurDAO;
+import Metier.Chauffeur;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fourat
  */
 public class PAjoutChauffeur extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PAjoutChauffeur
-     */
-    public PAjoutChauffeur() {
+    JFrame f;
+    PAfficheAgentsChaffeurs p;
+    public PAjoutChauffeur(JFrame f, PAfficheAgentsChaffeurs p) {
+        this.f=f;
+        this.p=p;
         initComponents();
     }
 
@@ -64,6 +70,11 @@ public class PAjoutChauffeur extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus.png"))); // NOI18N
         jButton1.setText("Ajouter");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -142,6 +153,31 @@ public class PAjoutChauffeur extends javax.swing.JPanel {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!(jTextField1.getText().isEmpty() && jTextField2.getText().isEmpty() && jTextField3.getText().isEmpty() &&
+                jTextField4.getText().isEmpty() && jTextField5.getText().isEmpty() && jTextField6.getText().isEmpty() ))
+        {
+            String nom = jTextField1.getText();
+            String prenom = jTextField2.getText();
+            String permis = jTextField3.getText();
+            String tel = jTextField4.getText();
+            String email = jTextField5.getText();
+            float prix = Float.valueOf(jTextField6.getText());
+            Chauffeur c = new Chauffeur(nom, prenom, permis, tel,prix);
+            c.setEmail(email);
+            if(ChauffeurDAO.getInstance().insert(c))
+            {
+                JOptionPane.showMessageDialog(this,"Chauffeur Ajoute","Succes",JOptionPane.INFORMATION_MESSAGE);
+                this.p.tmc.setData(this.p.tmc.refresh());
+                this.f.setVisible(false);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Erreur d'ajout","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

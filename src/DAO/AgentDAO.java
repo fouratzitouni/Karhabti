@@ -24,8 +24,9 @@ public final class AgentDAO
         return ins;
     }
     
-    public void insert(Agent a)
+    public boolean insert(Agent a)
     {
+        boolean t = false;
         try
         {
             PreparedStatement pst = getConnection().prepareStatement("INSERT INTO agent VALUES (default,?,?,?,?,?);");
@@ -34,10 +35,11 @@ public final class AgentDAO
             pst.setString(3,a.getLogin());
             pst.setString(4,a.getPass());
             pst.setString(5,a.getTel());
-            pst.executeUpdate();
+            t= !pst.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+        return t;
     }
     
     public Agent find(String login)
@@ -77,4 +79,36 @@ public final class AgentDAO
         return l;
     }
     
+    public boolean delete(String l)
+    {
+        boolean t = false;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("DELETE FROM agent WHERE tel = ?");
+            pst.setString(1,l);
+            t= !pst.execute();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return t;
+    }
+    
+    public Agent findbyid(int id)
+    {
+        Agent a = null;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM agent WHERE id = ?;");
+            pst.setInt(1, id);
+            ResultSet res = pst.executeQuery();
+            if(res.next())
+            {
+                a = new Agent(res.getString(2),res.getString(3),res.getString(4),res.getString(6));
+                a.setId(res.getInt(1));
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return a;
+    }
 }

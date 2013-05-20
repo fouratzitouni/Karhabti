@@ -25,8 +25,9 @@ public final class ChauffeurDAO
         return ins;
     }
     
-    public void insert(Chauffeur c)
+    public boolean insert(Chauffeur c)
     {
+        boolean t = false;
         try
         {
             PreparedStatement pst = getConnection().prepareStatement("INSERT INTO chauffeur VALUES(default,?,?,?,?,?,?);");
@@ -43,19 +44,21 @@ public final class ChauffeurDAO
                 pst.setString(5, null);
             }
             pst.setFloat(6,c.getPrix());
-            pst.executeUpdate();
+            t= !pst.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+        return t;
     }
     
-    public int getId(Chauffeur c)
+    public int getId(String nom)
     {
-        int id =0;
+        int id = 1;
+        String n = nom.substring(0,nom.indexOf(" "));
         try
         {
-            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM chauffeur WHERE permis = ?;");
-            pst.setString(1,c.getPermis());
+            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM chauffeur WHERE nom = ?;");
+            pst.setString(1,n);
             ResultSet res = pst.executeQuery();
             if(res.next())
             {
@@ -65,6 +68,24 @@ public final class ChauffeurDAO
             System.out.println(ex.getMessage());
         }
         return id;
+    }
+    
+    public Chauffeur findbyid(int id)
+    {
+        Chauffeur c = null;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM chauffeur WHERE id = ?;");
+            pst.setInt(1,id);
+            ResultSet res = pst.executeQuery();
+            if(res.next())
+            {
+                c = new Chauffeur(res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getFloat(7));
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return c;
     }
     
     public ArrayList<Chauffeur> listAll()
@@ -83,5 +104,19 @@ public final class ChauffeurDAO
             System.out.println(ex.getMessage());
         }
         return l;
+    }
+    
+    public boolean delete(String l)
+    {
+        boolean t = false;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("DELETE FROM chauffeur WHERE tel = ?;");
+            pst.setString(1, l);
+            t = !pst.execute();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return t;
     }
 }

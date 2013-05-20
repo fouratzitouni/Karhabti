@@ -1,12 +1,17 @@
 package DAO;
 
+import Metier.Agent;
+import Metier.Client;
 import Metier.Contrat;
+import Metier.Voiture;
 import Technique.DbCon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Technique.Authentification;
+import java.sql.Date;
+import java.util.ArrayList;
 
 public final class ContratDAO
 {
@@ -24,8 +29,9 @@ public final class ContratDAO
         return ins;
     }
     
-    public void insert(Contrat c)
+    public boolean insert(Contrat c)
     {
+        boolean t = false;
         try
         {
             PreparedStatement pst = getConnection().prepareStatement("INSERT INTO contrat VALUES (default,?,?,?,?,?,?,?);");
@@ -39,19 +45,47 @@ public final class ContratDAO
             {
                 pst.setString(3,null);
             }
-            if(c.getChauffeur() != null)
-            {
-                pst.setInt(4,ChauffeurDAO.getInstance().getId(c.getChauffeur())); // chauffeur DAO
-            }
-            else
-            {
-                pst.setString(4, null);
-            }
+
+                pst.setInt(4,c.getChauffeur()); 
+
             pst.setInt(5,Authentification.getInstance().getAgent().getId());
             pst.setDate(6,c.getDebut());
             pst.setDate(7,c.getFin());
+            t = !pst.execute();
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
+        return t;
+    }
+    
+    public ArrayList<Contrat> listAll()
+    {
+        ArrayList<Contrat> l = new ArrayList<Contrat>();
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM contrat;");
+            ResultSet res = pst.executeQuery();
+            while(res.next())
+            {
+                Client c1 = ClientDAO.getInstance().findbycin(res.getString(3));
+                Voiture v = VoitureDAO.getInstance().find(res.getString(2));
+                Agent a = AgentDAO.getInstance().findbyid(res.getInt(6));
+                Date debut = res.getDate(7);
+                Date Fin = res.getDate(8);
+                Contrat c = new Contrat(debut, Fin, a, c1, v);
+                if(res.getString(4) != null)
+                {
+                    c.setClient2(ClientDAO.getInstance().findbycin(res.getString(4)));
+                }
+                if(res.getInt(5) != 0)
+                {
+                    c.setChauffeur(res.getInt(5));
+                }
+                l.add(c);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return l;
     }
 }

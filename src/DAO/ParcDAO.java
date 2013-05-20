@@ -1,6 +1,7 @@
 package DAO;
 
 import Metier.Parc;
+import Metier.Voiture;
 import Technique.DbCon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,6 +41,20 @@ public final class ParcDAO
             System.out.println(ex.getMessage());
         }
         return l;
+    }
+    
+    public boolean setnd(Voiture v)
+    {
+        boolean t = false;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("UPDATE parc SET dispo = 0 WHERE mat = ? ;");
+            pst.setString(1,v.getMat());
+            t = !pst.execute();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return t;
     }
     
 }

@@ -1,44 +1,38 @@
 package GUI;
 
-import DAO.ClientDAO;
-import Metier.Client;
+import DAO.ContratDAO;
+import Metier.Contrat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
-public class MyTableClients extends AbstractTableModel
+public class MyTableContrats extends AbstractTableModel
 {
 
-    private String[] colHeader = {"Nom","Prenom","Cin","Telephone"};
+    private String[] colHeader = {"Matricule","Client","Debut","Fin","Agent"};
     private Object[][] rows = refresh();
 
     public Object[][] refresh() 
     {
-        ArrayList<Client> l = ClientDAO.getInstance().listAll();
-        Object[][] tab = new Object[l.size()][4];
+        ArrayList<Contrat> l = ContratDAO.getInstance().listAll();
+        Object[][] tab = new Object[l.size()][5];
+        
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         int i = 0;
-        for(Client c : l)
+        for(Contrat c : l)
         {
-            tab[i][0] = c.getNom();
-            tab[i][1] = c.getPrenom();
-            tab[i][2] = c.getCin();
-            tab[i][3] = c.getTel();
+            tab[i][0] = c.getV().getMat();
+            tab[i][1] = c.getClient1().getNom()+" "+c.getClient1().getPrenom();
+            tab[i][2] = df.format(c.getDebut());
+            tab[i][3] = df.format(c.getFin());
+            tab[i][4] = c.getAgent().getNom()+" "+c.getAgent().getPrenom();
             i++;
         }
         return tab;
     }
     
-    public static String[] listnames()
-    {
-        ArrayList<Client> l = ClientDAO.getInstance().listAll();
-        String[] list = new String[l.size()];
-        int i = 0;
-        for(Client c : l)
-        {
-            list[i] = c.getNom()+" "+c.getPrenom();
-            i++;
-        }
-        return list;
-    }
+
+   
     
     
     public Object getValueAt(int arg0, int arg1) {

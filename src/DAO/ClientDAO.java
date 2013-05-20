@@ -53,13 +53,36 @@ public final class ClientDAO
         return t;
     }
     
-    public Client find(String cin)
+    public Client find(String nom)
+    {
+        Client c = null;
+        String n = nom.substring(0,nom.indexOf(" "));
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM client WHERE nom = ?;");
+            pst.setString(1, n);
+            ResultSet res = pst.executeQuery();
+            if(res.next())
+            {
+                c = new Client(res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(7),res.getString(8));
+                if(res.getString(6) != null)
+                {
+                    c.setEmail(res.getString(6));
+                }
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return c;
+    }
+    
+    public Client findbycin(String cin)
     {
         Client c = null;
         try
         {
             PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM client WHERE cin = ?;");
-            pst.setString(1, cin);
+            pst.setString(1,cin);
             ResultSet res = pst.executeQuery();
             if(res.next())
             {

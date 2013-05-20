@@ -10,9 +10,7 @@ package GUI;
  */
 public class PAfficheContrats extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PAfficheContrats
-     */
+    MyTableContrats tm = new MyTableContrats();
     public PAfficheContrats() {
         initComponents();
     }
@@ -35,17 +33,7 @@ public class PAfficheContrats extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setText("Liste des Contracts Actifs");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-
-            }
-        ));
+        jTable1.setModel(this.tm);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file delete.png"))); // NOI18N

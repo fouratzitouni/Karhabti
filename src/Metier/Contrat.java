@@ -8,7 +8,7 @@ public class Contrat
     Agent agent;
     Client client1, client2;
     Voiture v;
-    Chauffeur chauffeur;
+    int chauffeur;
 
     public Contrat(Date debut, Date fin, Agent agent, Client client1, Voiture v) {
         this.debut = debut;
@@ -66,11 +66,11 @@ public class Contrat
         this.v = v;
     }
 
-    public Chauffeur getChauffeur() {
+    public int getChauffeur() {
         return chauffeur;
     }
 
-    public void setChauffeur(Chauffeur chauffeur) {
+    public void setChauffeur(int chauffeur) {
         this.chauffeur = chauffeur;
     }
 
