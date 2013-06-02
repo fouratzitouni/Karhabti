@@ -1,6 +1,7 @@
 package DAO;
 
 import Metier.Agent;
+import Metier.Chauffeur;
 import Metier.Client;
 import Metier.Contrat;
 import Metier.Voiture;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import Technique.Authentification;
 import java.sql.Date;
 import java.util.ArrayList;
+
 
 public final class ContratDAO
 {
@@ -87,5 +89,59 @@ public final class ContratDAO
             System.out.println(ex.getMessage());
         }
         return l;
+    }
+    
+    public boolean delete(String mat, String cin, Date debut)
+    {
+        boolean t = false;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("DELETE FROM contrat WHERE mat = ? AND client1 = ? AND debut = ? ;");
+            pst.setString(1, mat);
+            pst.setString(2, cin);
+            pst.setDate(3, debut);
+            t = !pst.execute();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return t;
+    }
+    
+    public Contrat find(String mat, String cin, Date debut)
+    {
+        Contrat c = null;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("Select * FROM contrat WHERE mat = ? AND client1 = ? AND debut = ? ;");
+            pst.setString(1, mat);
+            pst.setString(2, cin);
+            pst.setDate(3, debut);
+            ResultSet res = pst.executeQuery();
+            while(res.next())
+            {
+                Agent a = AgentDAO.getInstance().findbyid(res.getInt(6));
+                Voiture v = VoitureDAO.getInstance().find(res.getString(2));
+                Client c1 = ClientDAO.getInstance().findbycin(res.getString(3));
+                Client c2 = null;
+                if(res.getString(4) != null)
+                {
+                    c2 = ClientDAO.getInstance().findbycin(res.getString(3));
+                }
+                int ch = 0;
+                if(res.getInt(5) != 0)
+                {
+                    ch = res.getInt(5);
+                }
+                c = new Contrat(debut, debut, a, c1, v);
+                c.setClient2(c2);
+                c.setChauffeur(ch);
+                
+            }
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return c;
     }
 }

@@ -4,6 +4,20 @@
  */
 package GUI;
 
+import DAO.ChauffeurDAO;
+import DAO.ClientDAO;
+import DAO.ContratDAO;
+import DAO.ParcDAO;
+import Metier.Chauffeur;
+import Metier.Contrat;
+import Technique.SavePDF;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fourat
@@ -38,28 +52,40 @@ public class PAfficheContrats extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file delete.png"))); // NOI18N
         jButton1.setText("Resilier");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file 1.png"))); // NOI18N
-        jButton2.setText("Ancien Contrats");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/display down.png"))); // NOI18N
+        jButton2.setText("PDF");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jButton2)
-                .addGap(32, 32, 32)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,6 +101,91 @@ public class PAfficheContrats extends javax.swing.JPanel {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jTable1.getSelectedRow() != -1)
+        {
+            String mat = String.valueOf(tm.getValueAt(jTable1.getSelectedRow(), 0));
+            String nom = String.valueOf(tm.getValueAt(jTable1.getSelectedRow(), 1));
+            String cin = ClientDAO.getInstance().find(nom).getCin();
+            java.util.Date de = null;
+            try {
+                de = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(tm.getValueAt(jTable1.getSelectedRow(), 2)));
+            } catch (ParseException ex) {
+                Logger.getLogger(PAfficheContrats.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Date debut = new Date(de.getTime());
+            int reply = JOptionPane.showConfirmDialog(this,"Etes vous sur de vouloir résilier ce contart","Confirmation",JOptionPane.YES_NO_OPTION);
+            if(reply == 0)
+            {
+                if(ContratDAO.getInstance().delete(mat, cin, debut) && ParcDAO.getInstance().setd(mat))
+                {
+                    tm.setData(tm.refresh());
+                    JOptionPane.showMessageDialog(this,"Contrat resilie","Success",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"Erreur de connexion","Erreur",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Pas de contrat selectionne","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(jTable1.getSelectedRow() != -1)
+        {
+            String mat = String.valueOf(tm.getValueAt(jTable1.getSelectedRow(), 0));
+            String nom = String.valueOf(tm.getValueAt(jTable1.getSelectedRow(), 1));
+            String cin = ClientDAO.getInstance().find(nom).getCin();
+            java.util.Date de = null;
+            try {
+                de = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(tm.getValueAt(jTable1.getSelectedRow(), 2)));
+            } catch (ParseException ex) {
+                Logger.getLogger(PAfficheContrats.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Date debut = new Date(de.getTime());
+            Contrat c = ContratDAO.getInstance().find(mat, cin, debut);
+            String text = "Contrat de Location de Voiture\n";
+            text += "======================================================\n";
+            text += "Voiture: "+c.getV().getMarque()+" "+c.getV().getModel()+"\n";
+            text += "Matricule: "+c.getV().getMat();
+            text += "======================================================\n";
+            text += "Conducteur 1: "+c.getClient1().getNom()+" "+c.getClient1().getPrenom()+"\n";
+            text += "Cin: "+c.getClient1().getCin()+"\n";
+            text += "Numero de permis: "+c.getClient1().getPermi()+"\n";
+            if(c.getClient2() != null)
+            {
+                text += "Conducteur 2: "+c.getClient2().getNom()+" "+c.getClient2().getPrenom()+"\n";
+            text += "Cin: "+c.getClient2().getCin()+"\n";
+            text += "Numero de permis: "+c.getClient2().getPermi()+"\n";
+            }
+            text += "======================================================\n";
+            if(c.getChauffeur() != 0)
+            {
+                Chauffeur ch = ChauffeurDAO.getInstance().findbyid(c.getChauffeur());
+                text += "Chauffeur: "+ch.getNom()+" "+ch.getPrenom()+"\n";
+            text += "Numero de permis: "+ch.getPermis()+"\n";
+            text += "======================================================\n";
+            }
+            text += "Agent: "+c.getAgent().getNom()+" "+c.getAgent().getPrenom()+"\n";
+            text += "Numero de telephone: "+c.getAgent().getTel()+"\n";
+            text += "======================================================\n";
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            text += "Ce contrat est valable du "+df.format(c.getDebut())+" au "+df.format(c.getFin())+"\n";
+            text += "Signature Agent\n";
+            text += "Signature Clients\n";
+            new SavePDF("Agence Karhabti: Contrat de Location",text,String.valueOf(text.hashCode()));
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Pas de contrat selectionne","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

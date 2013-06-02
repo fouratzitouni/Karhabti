@@ -97,7 +97,7 @@ public class PAuthentification extends javax.swing.JPanel {
         }
         else
         {
-            JOptionPane.showConfirmDialog(this,"Vérifier le login et/ou mot de passe","Erreur",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Vérifier le login et/ou mot de passe","Erreur",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConnectActionPerformed
 

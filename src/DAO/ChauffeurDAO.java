@@ -119,4 +119,27 @@ public final class ChauffeurDAO
         }
         return t;
     }
+    
+    public Chauffeur find(String t)
+    {
+        Chauffeur c = null;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM chauffeur WHERE tel = ?;");
+            pst.setString(1,t);
+            ResultSet res = pst.executeQuery();
+            if(res.next())
+            {
+                c = new Chauffeur(res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getFloat(7));
+                if(res.getString(6) != null)
+                {
+                    c.setEmail(res.getString(6));
+                }
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return c;
+    }
+    
 }

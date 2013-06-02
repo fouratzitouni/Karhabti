@@ -42,13 +42,13 @@ public final class AgentDAO
         return t;
     }
     
-    public Agent find(String login)
+    public Agent find(String nom)
     {
         Agent a = null;
         try
         {
-            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM agent WHERE login = ?;");
-            pst.setString(1, login);
+            PreparedStatement pst = getConnection().prepareStatement("SELECT * FROM agent WHERE tel = ?;");
+            pst.setString(1, nom);
             ResultSet res = pst.executeQuery();
             if(res.next())
             {

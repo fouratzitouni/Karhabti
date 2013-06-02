@@ -30,7 +30,7 @@ public class PViewVoiture extends javax.swing.JPanel {
         jLabel10.setText("Causion: "+String.valueOf(this.v.getCaution()));
         if(this.v.getImage() != null)
         {
-            jPanel1.add(new ImgPanel(v.getImage().getAbsolutePath()));
+            //jPanel1.add(new ImgPanel(v.getImage().getAbsolutePath()));
         }
     }
 
@@ -43,7 +43,7 @@ public class PViewVoiture extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new ImgPanel(v.getImage().getAbsolutePath());
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();

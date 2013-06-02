@@ -57,4 +57,18 @@ public final class ParcDAO
         return t;
     }
     
+    public boolean setd(String mat)
+    {
+        boolean t = false;
+        try
+        {
+            PreparedStatement pst = getConnection().prepareStatement("UPDATE parc SET dispo = 1 WHERE mat = ? ;");
+            pst.setString(1,mat);
+            t = !pst.execute();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return t;
+    }
+    
 }

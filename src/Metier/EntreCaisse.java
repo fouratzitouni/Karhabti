@@ -1,9 +1,12 @@
 package Metier;
 
+import java.sql.Date;
+
 public class EntreCaisse
 {
     String type, montant, description;
     Agent agent;
+    Date date;
 
     public EntreCaisse(String type, String montant, String description, Agent agent) {
         this.type = type;
@@ -12,6 +15,15 @@ public class EntreCaisse
         this.agent = agent;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    
     public String getType() {
         return type;
     }

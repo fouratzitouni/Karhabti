@@ -6,6 +6,8 @@ package GUI;
 
 import DAO.AgentDAO;
 import DAO.ChauffeurDAO;
+import Metier.Agent;
+import Metier.Chauffeur;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -48,6 +50,11 @@ public class PAfficheAgentsChaffeurs extends javax.swing.JPanel {
         jLabel2.setText("Liste des Chauffeurs");
 
         jTable1.setModel(this.tma);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus.png"))); // NOI18N
@@ -67,6 +74,11 @@ public class PAfficheAgentsChaffeurs extends javax.swing.JPanel {
         });
 
         jTable2.setModel(this.tmc);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus.png"))); // NOI18N
@@ -203,6 +215,36 @@ public class PAfficheAgentsChaffeurs extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Pas de chauffeur selectionne","Erreur",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if(evt.getClickCount() == 2 && !evt.isConsumed())
+        {
+            String cin = String.valueOf(tma.getValueAt(jTable1.getSelectedRow(),2));
+            Agent a = AgentDAO.getInstance().find(cin);
+            JFrame f = new JFrame("Fiche de l'agent ");
+            f.setSize(600,500);
+            f.add(new PViewAgent(f,a));
+            f.setAlwaysOnTop(true);
+            f.setResizable(false);
+            f.setLocation(20,20);
+            f.setVisible(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        if(evt.getClickCount() == 2 && !evt.isConsumed())
+        {
+            String cin = String.valueOf(tmc.getValueAt(jTable2.getSelectedRow(),2));
+            Chauffeur c = ChauffeurDAO.getInstance().find(cin);
+            JFrame f = new JFrame("Fiche du chauffeur");
+            f.setSize(600,500);
+            f.add(new PViewChauffeur(f,c));
+            f.setAlwaysOnTop(true);
+            f.setResizable(false);
+            f.setLocation(20,20);
+            f.setVisible(true);
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -182,6 +182,7 @@ public class PAfficheVoiture extends javax.swing.JPanel {
         if(evt.getClickCount() == 2 && !evt.isConsumed())
         {
             Voiture v = VoitureDAO.getInstance().find(String.valueOf(tm.getValueAt(jTableListeVoiture.getSelectedRow(),0)));
+            System.out.println(v.getImage().getAbsolutePath());
             JFrame f = new JFrame("Fiche de Voiture "+v.getMat());
             f.setSize(600,500);
             f.add(new PViewVoiture(v,f));

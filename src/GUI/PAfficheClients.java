@@ -40,6 +40,11 @@ public class PAfficheClients extends javax.swing.JPanel {
         jLabel1.setText("Liste des Clients");
 
         jTable1.setModel(this.tm);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus.png"))); // NOI18N
@@ -158,6 +163,21 @@ public class PAfficheClients extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Pas de client selectionne","Erreur",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if(evt.getClickCount() == 2 && !evt.isConsumed())
+        {
+            String cin = String.valueOf(tm.getValueAt(jTable1.getSelectedRow(),2));
+            Client c = ClientDAO.getInstance().findbycin(cin);
+            JFrame f = new JFrame("Fiche du Client ");
+            f.setSize(600,500);
+            f.add(new PViewClient(f,c));
+            f.setAlwaysOnTop(true);
+            f.setResizable(false);
+            f.setLocation(20,20);
+            f.setVisible(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
